@@ -1,11 +1,13 @@
 # Furby Project
 Furby - Sound controlled lips
 
-Used Hardware 
+Used Hardware
+
   Raspberry pi one - for the size
   MicroSD 32 GB -  Raspian 05-09-2023 
 
 Focus Software
+
   Debian version: 11 (bullseye) - Kernel version: 6.1 - System: 32-bit - Release date: May 3rd 2023
   Node-red
   
