@@ -1,0 +1,5 @@
+apt-get install Espeak
+
+pico speak.py
+espeak -vnl "v4 mijn vriendin heeft redbul app geïnstalleerd nou heeft ze geen internet meer hoe kan dit? wat heeft ze verkeerd gedaan ??" 2>/dev/null
+chmod +x speak.py
