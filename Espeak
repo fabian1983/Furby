@@ -1,5 +1,7 @@
-apt-get install Espeak
+Option 1
+  apt-get install espeak
+  pico speak.py
+  espeak -vnl "Hallo Welkom op mijn tekst naar spraak computer ??" 2>/dev/null
+  chmod +x speak.py
 
-pico speak.py
-espeak -vnl "v4 mijn vriendin heeft redbul app geïnstalleerd nou heeft ze geen internet meer hoe kan dit? wat heeft ze verkeerd gedaan ??" 2>/dev/null
-chmod +x speak.py
+Option 2
