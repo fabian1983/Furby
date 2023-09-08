@@ -1,0 +1,30 @@
+Software http://raspberrypi0:12101 . 
+https://rhasspy.readthedocs.io/en/latest/installation/
+curl -sSL https://get.docker.com | sh
+sudo usermod -a -G docker $USER
+sudo reboot
+
+pico /etc/docker/daemon.json
+
+{
+  "experimental": true
+}
+
+sudo systemctl restart docker
+docker pull --platform linux/arm/v6 rhasspy/rhasspy
+docker pull rhasspy/rhasspy
+docker pull --platform linux/arm/v6 rhasspy/rhasspy
+
+docker run -d -p 12101:12101 \
+      --name rhasspy \
+      --restart unless-stopped \
+      -v "$HOME/.config/rhasspy/profiles:/profiles" \
+      -v "/etc/localtime:/etc/localtime:ro" \
+      --device /dev/snd:/dev/snd \
+      rhasspy/rhasspy \
+      --user-profiles /profiles \
+      --profile en
+
+=node-red= http://raspberrypi0:1880. 
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+sudo systemctl enable nodered.service
