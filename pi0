@@ -1,3 +1,11 @@
+bluetoothtcl
+scan on 
+scann off
+connect AE:C9:8D:E5:61:00 
+
+
+
+
 Software http://raspberrypi0:12101 . 
 https://rhasspy.readthedocs.io/en/latest/installation/
 curl -sSL https://get.docker.com | sh
