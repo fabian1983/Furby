@@ -1,0 +1,110 @@
+
+   /*
+  DRV8833-Dual-Motor-Driver-Module
+  made on 23 Nov 2020
+  by Amir Mohammad Shojaee @ Electropeak
+  Home
+ EDit for FURBY
+*/
+
+#define AIN1 4
+#define AIN2 5
+#digitalRead()7
+
+void setup() {
+  Serial.begin(9600);
+  
+  pinMode(AIN1,OUTPUT);
+  pinMode(AIN2,OUTPUT);
+}
+ 
+void loop() {
+//motorfuck
+  digitalWrite(AIN1,HIGH); //forward 
+  digitalWrite(AIN2,LOW);
+delay(500);
+  digitalWrite(AIN1,HIGH); //forward 
+  digitalWrite(AIN2,LOW);
+delay(500);
+
+/*500 oog knipperen*/
+  digitalWrite(AIN1,HIGH); //forward 
+  digitalWrite(AIN2,LOW);
+delay(500);
+  
+  digitalWrite(AIN1,LOW); //break
+  digitalWrite(AIN2,LOW);  
+delay(500);
+     
+  digitalWrite(AIN1,LOW); //Backward 
+  digitalWrite(AIN2,HIGH); 
+delay(500);
+  
+  digitalWrite(AIN1,LOW); //break
+  digitalWrite(AIN2,LOW);  
+delay(500);
+
+delay(1000);  
+/*1000 oog knipperen*/
+  digitalWrite(AIN1,HIGH); //forward 
+  digitalWrite(AIN2,LOW);
+delay(1000);
+  
+  digitalWrite(AIN1,LOW); //break
+  digitalWrite(AIN2,LOW);  
+delay(1000);
+     
+  digitalWrite(AIN1,LOW); //Backward 
+  digitalWrite(AIN2,HIGH); 
+delay(1000);
+  
+  digitalWrite(AIN1,LOW); //break
+  digitalWrite(AIN2,LOW);  
+delay(1000);
+
+/*150 veel praten*/
+  digitalWrite(AIN1,HIGH); 
+  digitalWrite(AIN2,LOW);
+delay(75); 
+  digitalWrite(AIN1,LOW); 
+  digitalWrite(AIN2,LOW);  
+delay(75);    
+  digitalWrite(AIN1,LOW); 
+  digitalWrite(AIN2,HIGH);
+delay(75);
+  digitalWrite(AIN1,LOW); 
+  digitalWrite(AIN2,LOW);  
+delay(75)
+
+
+
+  
+}
+
+
+
+
+
+To do this we'll need the LED encoder. If you harken back to the PCB pinout, you'll remember
+
+ GEAR ROTATION which detects the perforations in Furby's cam as it moves
+ GEAR LED which lights the LED shining through the cam
+ CAM HOME which activates when the cam is in the "home" position
+What we'll be doing is lighting the LED, and watching the ROTATION sensor.
+
+In outline:
+
+First we define these new pins and establish them in startup()
+We tell startup() to watch:
+the button(s) pins (GO FORWARD and GO REVERSE)
+and sensor pin (GEAR ROTATION)
+...and run "encoder" when any changes
+Next we need to write encoder() which calls read_button and read_sensor
+read_button - the interrupt was from one of the buttons
+set MOTOR FORWARD or MOTOR REVERSE
+exit encoder()
+read_cam_sensor - the interrupt was from the cam moving
+reads CAM HOME - are "home"? If we are, reset our known position. If not, continue counting from the last known position.
+if so, which direction were we going? (MOTOR FORWARD or MOTOR REVERSE)
+from this calculate the new position
+stop the motor! Set both MOTOR FORWARD and MOTOR REVERSE to off.
