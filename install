@@ -1,0 +1,67 @@
+sudo apt update
+sudo apt full-upgrade
+
+nodered
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+sudo systemctl enable nodered.service
+
+rhasspy
+Software http://raspberrypi0:12101 . 
+https://rhasspy.readthedocs.io/en/latest/installation/
+
+curl -sSL https://get.docker.com | sh
+sudo usermod -a -G docker $USER
+sudo reboot
+
+ docker run -d -p 12101:12101 \
+      --name rhasspy \
+      --restart unless-stopped \
+      -v "$HOME/.config/rhasspy/profiles:/profiles" \
+      -v "/etc/localtime:/etc/localtime:ro" \
+      --device /dev/snd:/dev/snd \
+      rhasspy/rhasspy \
+      --user-profiles /profiles \
+      --profile en
+
+sudo apt-get install rhasspy_armel.deb 
+- of sudo apt install /path/to/rhasspy_armhf.deb
+First, edit your /etc/docker/daemon.json file (create it if it doesn't exist using sudo) and add the following content:
+
+{
+  "experimental": true
+}
+Next, restart your Docker daemon by running:
+
+$ sudo systemctl restart docker
+Finally, pull the correct Docker image:
+
+$ docker pull --platform linux/arm/v6 rhasspy/rhasspy
+
+
+Samba
+
+mkdir /home/Fabian/shared
+
+sudo nano /etc/samba/smb.conf
+
+[Share]
+path = /home/Fabian/shared
+writeable=Yes
+create mask=0777
+directory mask=0777
+public=no
+
+//raspberrypi/Share
+sudo smbpasswd -a pi
+sudo systemctl restart smbd
+
+
+
+
+
+
+
+status
+sudo service --status-all
+sudo systemctl enable nodered.service
+sudo systemctl restart smbd
