@@ -1,0 +1,79 @@
+   /*
+  DRV8833-Dual-Motor-Driver-Module
+  made on 23 Nov 2020
+  by Amir Mohammad Shojaee @ Electropeak
+  Home
+ EDit for FURBY
+*/
+
+#define AIN1 4
+#define AIN2 5
+int sensor1 = 7;
+int sensor2 = 7;
+int motor1 = 4;
+int motor2 = 5;
+
+
+void setup() {
+  Serial.begin(9600);
+  
+  pinMode(AIN1,OUTPUT);
+  pinMode(AIN2,OUTPUT);
+}
+ 
+void loop() {
+C:
+  if (sensor1 == LOW) {
+    digitalWrite(AIN1, HIGH);    digitalWrite(AIN2, LOW);    delay(500);
+    digitalWrite(AIN1, HIGH);    digitalWrite(AIN2, HIGH);
+A:
+    if (sensor2 == LOW) {
+      digitalWrite(AIN1, LOW);      digitalWrite(AIN2, HIGH);      delay(500);
+      digitalWrite(AIN1, HIGH);      digitalWrite(AIN2, HIGH);      delay(1000);
+      goto C;
+    } goto A;
+    if (sensor2 == LOW) {
+      digitalWrite(AIN1, HIGH);      digitalWrite(AIN2, LOW);      delay(500);
+      digitalWrite(AIN1, HIGH);      digitalWrite(AIN2, HIGH); 
+B:
+      if (sensor1 == LOW) {
+        digitalWrite(AIN1, LOW);        digitalWrite(AIN2, HIGH);        delay(500);
+        digitalWrite(AIN1, HIGH);        digitalWrite(AIN2, HIGH);        delay(1000);
+        goto C;
+      }
+      goto B;
+    }
+  }
+
+//motorfuck
+  digitalWrite(AIN1,HIGH);   digitalWrite(AIN2,LOW); delay(500);
+  digitalWrite(AIN1,HIGH);   digitalWrite(AIN2,LOW); delay(500);
+
+/*500 oog knipperen*/
+  digitalWrite(AIN1,HIGH);   digitalWrite(AIN2,LOW); delay(500);
+  
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,LOW);  delay(500);
+     
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,HIGH); delay(500);
+  
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,LOW);  delay(500);
+
+delay(1000);  
+/*1000 oog knipperen*/
+  digitalWrite(AIN1,HIGH);   digitalWrite(AIN2,LOW); delay(1000);
+  
+  digitalWrite(AIN1,LOW); digitalWrite(AIN2,LOW);  
+delay(1000);
+     
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,HIGH); delay(1000);
+  
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,LOW);  delay(1000);
+
+/*150 veel praten*/
+  digitalWrite(AIN1,HIGH);   digitalWrite(AIN2,LOW); delay(75); 
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,LOW);  delay(75);    
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,HIGH); delay(75);
+  digitalWrite(AIN1,LOW);   digitalWrite(AIN2,LOW);  delay(75);
+
+  
+}
