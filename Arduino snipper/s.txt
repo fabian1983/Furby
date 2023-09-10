@@ -1,0 +1,27 @@
+void findHome(){
+  
+ Serial.println("Finding home");
+ digitalWrite(in1, HIGH);
+ digitalWrite(in2, LOW); 
+ analogWrite(enA, motorSpeed);
+
+ int f=0;
+ 
+ while (f==0){
+
+  int camHomeValue=digitalRead(pinCamHome);
+  
+  Serial.println("Cam home value: " + String(camHomeValue));
+
+  if (camHomeValue==0){    
+    f=1;    
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);        
+  }  
+  delay(15);
+ }
+ 
+ Serial.println("Found it!");
+ delay(2000);
+ 
+}
