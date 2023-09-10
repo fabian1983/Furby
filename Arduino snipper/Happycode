@@ -1,0 +1,72 @@
+#define in1 4
+#define in2 5
+#define enA 6
+#define pinCamHome 11
+int motorspeed=50;
+
+
+void setup() {
+    Serial.begin(9600);
+  // put your setup code here, to run once:
+  pinMode(in1,OUTPUT);
+  pinMode(in2,OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(300);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(150);
+   digitalWrite(in1, LOW);  digitalWrite(in2, LOW);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(150);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(300);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(300);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(800);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(800);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(600);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(600);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(600);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(600);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(600);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(600);
+
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(300);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(150);
+   digitalWrite(in1, LOW);  digitalWrite(in2, LOW);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(150);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(300);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(300);
+
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(800);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(800);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(600);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(600);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(600);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(600);
+   digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); delay(600);
+   digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); delay(600);
+}
+
+void findHome(){  
+ Serial.println("Finding home");
+ digitalWrite(in1, HIGH);  digitalWrite(in2, LOW); 
+  analogWrite(enA, motorspeed);
+
+ int f=0;
+ 
+ while (f==0){
+
+  int camHomeValue=digitalRead(pinCamHome);
+  
+  Serial.println("Cam home value: " + String(camHomeValue));
+
+  if (camHomeValue==0){    
+    f=1;    
+    digitalWrite(in1, LOW); digitalWrite(in2, LOW);        
+  }  
+  delay(15);
+ }
+ 
+ Serial.println("Found it!");
+ delay(2000);
+ 
+}
