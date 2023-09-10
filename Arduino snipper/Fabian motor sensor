@@ -1,0 +1,44 @@
+#define in1 4
+#define in2 5
+#define enA 6
+#define pinCamHome 7
+int motorspeed=50;
+
+
+void setup() {
+    Serial.begin(9600);
+  // put your setup code here, to run once:
+  pinMode(in1,OUTPUT);
+  pinMode(in2,OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+}
+
+void findHome(){  
+ Serial.println("Finding home");
+ digitalWrite(in1, HIGH);
+ digitalWrite(in2, LOW); 
+ analogWrite(enA, motorspeed);
+
+ int f=0;
+ 
+ while (f==0){
+
+  int camHomeValue=digitalRead(pinCamHome);
+  
+  Serial.println("Cam home value: " + String(camHomeValue));
+
+  if (camHomeValue==0){    
+    f=1;    
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);        
+  }  
+  delay(15);
+ }
+ 
+ Serial.println("Found it!");
+ delay(2000);
+ 
+}
