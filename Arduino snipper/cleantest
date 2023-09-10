@@ -1,0 +1,25 @@
+/*
+ DRV8833-Dual-Motor-Driver-Module
+  made on 23 Nov 2023  by Amir Mohammad Shojaee @ Electropeak
+ EDit for FURBY
+*/
+
+#define AIN1 4
+#define AIN2 5
+#define SENSOR 5
+int sensor1 = 7;
+int sensor2 = 7;
+int motor1 = 4;
+int motor2 = 5;
+
+void setup() {
+  Serial.begin(9600);  
+  pinMode(AIN1,OUTPUT);
+  pinMode(AIN2,OUTPUT);
+  pinMode(SENSOR,OUTPUT);
+
+}
+ 
+void loop() {
+
+}
