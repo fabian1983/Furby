@@ -1,0 +1,57 @@
+
+#include <Stepper.h>
+
+const int num_step = 200; // motor steps per revolution
+const int pwm_cha = 6;
+const int dir_cha = 7;
+const int pwm_chb = 4;
+const int dir_chb = 5;
+
+int Pot1 = 2;
+int val;
+Servo myservo;  // create servo object to control a servo 
+Stepper stepper(num_step, dir_cha, dir_chb);
+
+void setup()
+{
+   Serial.begin(9600);
+   pinMode(pwm_cha, OUTPUT);
+   pinMode(pwm_chb, OUTPUT);
+   pinMode(brake_cha, OUTPUT);
+   pinMode(brake_chb, OUTPUT);
+   digitalWrite(pwm_cha, HIGH);
+   digitalWrite(pwm_chb, HIGH);
+
+}
+
+void loop()
+{
+ int PVal=analogRead(Pot1);
+ if (PVal >= 507 || PVal <= 517)
+ { 
+   // This is bit that needs to turn off the 2 Phases
+ }
+ if (PVal > 517 )
+ {
+   int K= map (PVal, 518,1023,0,150); 
+    int S=map (K, 0,150,0,num_step);
+    stepper.setSpeed(K); //this sets the speed of the stepper motor
+    stepper.step(S); //this sets the direction 
+    Serial.print("Forward, K=");
+    Serial.print(K);
+    Serial.print(" PVAL=");
+    Serial.println(PVal);     
+  }
+if (PVal < 507 )
+ {
+   int K= map (PVal, 0,506,150,0); 
+    int S=map (K, 0,150,0,num_step);
+    stepper.setSpeed(K); //this sets the speed of the stepper motor
+    stepper.step(-S); //this sets the direction 
+    Serial.print("Backward, K=");
+    Serial.print(K);
+    Serial.print(" PVAL=");
+    Serial.println(PVal);     
+  }
+  
+}
